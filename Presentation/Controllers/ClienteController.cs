@@ -96,7 +96,7 @@ namespace Presentation.Controllers
             }
             else
             {
-                ViewBag.Mensaje = "Ocurrio un error al intentar eliminar el cliente";
+                ViewBag.Mensaje = "El usuario aun tiene cuentas activas, favor de verificar las cuentas";
             }
             return PartialView("Modal");
         }

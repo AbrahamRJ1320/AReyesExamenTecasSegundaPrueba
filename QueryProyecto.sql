@@ -491,5 +491,3 @@ SELECT Cliente.[IdCliente]
   FROM [dbo].[Cliente] INNER JOIN Rol on Cliente.IdRol = Rol.IdRol
   WHERE NumeroCliente = @NumeroCliente
   END
-
-
