@@ -62,7 +62,13 @@
                 </tbody>
             </table>
             <hr />
+            <div>
+                <a asp-controller="UserCliente"
+                   asp-action="ImprimirHistorialDeCuenta"
+                   asp-route-IdNumeroCuenta="@Model.Cuenta.IdNumeroCuenta"
+                   class="btn btn-info text-white">Imprimir Historial</a>
 
+            </div>
         </main>
     </div>
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 
 namespace Presentation.Controllers
 {
@@ -241,7 +242,7 @@ namespace Presentation.Controllers
                 Business.Cliente cliente = new Business.Cliente();
                 cliente.Historial = new Business.HistorialTransacciones();
                 cliente.Historial.Transacciones = result.Objetos;
-
+                cliente.IdCliente = IdCliente;
                 return View(cliente);
             }
             else
@@ -260,8 +261,9 @@ namespace Presentation.Controllers
             {
                 Business.Cliente cliente = new Business.Cliente();
                 cliente.Historial = new Business.HistorialTransacciones();
+                cliente.Cuenta = new Business.Cuenta();
                 cliente.Historial.Transacciones = result.Objetos;
-
+                cliente.Cuenta.IdNumeroCuenta = IdNumeroCuenta;
                 return View(cliente);
             }
             else
@@ -270,6 +272,47 @@ namespace Presentation.Controllers
                 return PartialView("Modal");
             }
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult ImprimirHistorialGeneral(int IdCliente)
+        {
+            Business.ControlResult result = Business.HistorialTransacciones.GetByIdCliente(IdCliente);
+            Business.Cliente cliente = new Business.Cliente();
+            if (result.ProcesoCorrecto)
+            {
+
+                cliente.Historial = new Business.HistorialTransacciones();
+                cliente.Historial.Transacciones = result.Objetos;
+            }
+
+            return new Rotativa.AspNetCore.ViewAsPdf("ImprimirHistorialGeneral", cliente)
+            {
+                FileName = $"Historial {cliente.Historial.Nombre}.pdf",
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                PageSize = Rotativa.AspNetCore.Options.Size.A4
+            };
+        }
+
+        [HttpGet]
+        public IActionResult ImprimirHistorialDeCuenta(int IdNumeroCuenta)
+        {
+            Business.ControlResult result = Business.HistorialTransacciones.GetByIdNumeroCuenta(IdNumeroCuenta);
+            Business.Cliente cliente = new Business.Cliente();
+            if (result.ProcesoCorrecto)
+            {
+
+                cliente.Historial = new Business.HistorialTransacciones();
+                cliente.Cuenta = new Business.Cuenta();
+                cliente.Historial.Transacciones = result.Objetos;
+
+            }
+            return new ViewAsPdf("ImprimirHistorialDeCuenta", cliente)
+            {
+                FileName = $"Historial de Cuenta {cliente.Historial.Nombre}.pdf",
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                PageSize = Rotativa.AspNetCore.Options.Size.A4
+            };
         }
     }
 }

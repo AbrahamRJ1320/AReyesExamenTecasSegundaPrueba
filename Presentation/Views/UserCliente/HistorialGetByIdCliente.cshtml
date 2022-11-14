@@ -62,7 +62,13 @@
                 </tbody>
             </table>
             <hr />
+            <div>
+                <a asp-controller="UserCliente"
+                   asp-action="ImprimirHistorialGeneral"
+                   asp-route-IdCliente="@Model.IdCliente"
+                   class="btn btn-info text-white">Imprimir Historial</a>
 
+            </div>
         </main>
     </div>
 

@@ -30,14 +30,14 @@
         {
             <tr>
                 <td style="visibility:collapse; display:none;">@cliente.Historial.IdTransaccion</td>
-                <td style="visibility:collapse; display:none;">@cliente.Historial.IdTipoTransaccion.</td>
+                <td style="visibility:collapse; display:none;">@cliente.Historial.IdTipoTransaccion</td>
                 <td>@cliente.Historial.Transaccion </td>
                 <td>@cliente.Historial.Detalle</td>
                 <td>@cliente.Historial.FechaTransaccion</td>
-                <td style="visibility:collapse; display:none;">@cliente.Historial.IdNumeroCuenta.</td>
+                <td style="visibility:collapse; display:none;">@cliente.Historial.IdNumeroCuenta</td>
                 <td>@cliente.Historial.NombreDeCuenta</td>
                 <td>$ @cliente.Historial.Saldo</td>
-                <td style="visibility:collapse; display:none;">@cliente.Historial.IdCliente.</td>
+                <td style="visibility:collapse; display:none;">@cliente.Historial.IdCliente</td>
                 <td>@cliente.Historial.Nombre  @cliente.Historial.ApellidoPaterno @cliente.Historial.ApellidoMaterno</td>
                 <td>@cliente.Historial.NumeroCliente</td>
                 <td>$ @cliente.Historial.MontoTransaccion</td>
@@ -45,4 +45,12 @@
         }
     </tbody>
 </table>
+
 <hr />
+<div>
+    <a asp-controller="Cliente"
+       asp-action="ImprimirHistorialGeneral"
+       asp-route-IdCliente="@Model.IdCliente"
+       class="btn btn-info text-white">Imprimir Historial</a>
+
+</div>
